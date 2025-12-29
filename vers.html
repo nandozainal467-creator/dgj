@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pendaftaran Santri Baru | Pondok Hidayatul Mubtadiin</title>
+
+<style>
+:root{
+  --ungu:#4b0082;
+  --emas:#d4af37;
+  --putih:#ffffff;
+}
+
+*{
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  margin:0;
+  background:linear-gradient(135deg, #2b004f, #4b0082);
+  color:var(--putih);
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg, var(--ungu), var(--emas));
+  padding:25px;
+  text-align:center;
+}
+
+header h1{
+  margin:0;
+  color:#fff;
+}
+
+header p{
+  margin-top:8px;
+  font-size:15px;
+}
+
+/* CONTAINER */
+.container{
+  max-width:900px;
+  margin:30px auto;
+  background:#ffffff;
+  color:#333;
+  border-radius:12px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* FORM */
+h2{
+  text-align:center;
+  color:var(--ungu);
+}
+
+form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+form input, form textarea, form select{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+textarea{
+  grid-column:1/3;
+  resize:none;
+}
+
+button{
+  grid-column:1/3;
+  padding:15px;
+  background:linear-gradient(90deg, var(--ungu), var(--emas));
+  border:none;
+  color:#fff;
+  font-size:16px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  color:#eee;
+  font-size:14px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  form{
+    grid-template-columns:1fr;
+  }
+  textarea, button{
+    grid-column:1/2;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Pondok Pesantren Hidayatul Mubtadiin</h1>
+  <p>Website Resmi Pendaftaran Santri Baru</p>
+</header>
+
+<div class="container">
+<h2>Form Pendaftaran Santri Baru</h2>
+
+<form id="daftarForm">
+  <input type="text" name="nama" placeholder="Nama Lengkap" required>
+  <input type="number" name="nik" placeholder="NIK" required>
+  <input type="text" name="tempat_lahir" placeholder="Tempat Lahir" required>
+  <input type="date" name="tanggal_lahir" required>
+
+  <select name="jenis_kelamin" required>
+    <option value="">Jenis Kelamin</option>
+    <option>Laki-laki</option>
+    <option>Perempuan</option>
+  </select>
+
+  <input type="text" name="asal_sekolah" placeholder="Asal Sekolah" required>
+  <input type="text" name="nama_ayah" placeholder="Nama Ayah" required>
+  <input type="text" name="nama_ibu" placeholder="Nama Ibu" required>
+  <input type="tel" name="hp" placeholder="No HP Aktif" required>
+  <input type="email" name="email" placeholder="Email" required>
+
+  <textarea name="alamat" placeholder="Alamat Lengkap" rows="4" required></textarea>
+
+  <button type="submit">Daftar Sekarang</button>
+</form>
+</div>
+
+<footer>
+© 2025 Pondok Hidayatul Mubtadiin • Pendaftaran Santri Baru
+</footer>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbydpX1tcpxwGnNjtIY4BV9Hquhu0_U05VH1GaReiqR5x11Kn3rY-ogwKf0e0dCweA4zJQ/exec";
+
+document.getElementById("daftarForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  let data = {};
+  formData.forEach((value, key) => data[key] = value);
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(() => {
+    alert("Pendaftaran berhasil! Data tersimpan.");
+    e.target.reset();
+  })
+  .catch(() => alert("Gagal mengirim data"));
+});
+</script>
+
+</body>
+</html>
